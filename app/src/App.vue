@@ -1,24 +1,25 @@
 <template>
-  <div>
-    <button v-if="screen != 2" class="btn btn-secondary btn-next" @click="screen += 1">
+  <div id='app' :style="myStyle">
+    <button v-if="screen != 3 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next" @click="screen += 1">
         Next
     </button>
-    <button v-if="screen != 1" class="btn btn-secondary btn-prev" @click="screen -= 1">
+    <button v-if="screen != 1 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-prev" @click="screen -= 1">
         Prev
     </button>
-    <div id='app' :style="myStyle">
-      <div v-if="screen==='lose'">
-        <EndScreen message="Loser"/>
-      </div>
-      <div v-if="screen==='win'">
-        <EndScreen message="Winner"/>
-      </div>
-      <div v-if="screen===1">
-        <JumperCookie @changeScreen="changeScreen"/>
-      </div>
-      <div v-if="screen===2">
-        <SwitcherCookie @changeScreen="changeScreen"/>
-      </div>
+    <div v-if="screen==='lose'">
+      <EndScreen message="Loser" @playAgain="playAgain"/>
+    </div>
+    <div v-if="screen==='win'">
+      <EndScreen message="Winner" @playAgain="playAgain"/>
+    </div>
+    <div v-if="screen===1">
+      <JumperCookie @changeScreen="changeScreen"/>
+    </div>
+    <div v-if="screen===2">
+      <SwitcherCookie @changeScreen="changeScreen"/>
+    </div>
+    <div v-if="screen===3">
+      <MailCookie @changeScreen="changeScreen"/>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@
 <script>
 import SwitcherCookie from './components/SwitcherCookie.vue'
 import JumperCookie from './components/JumperCookie.vue'
+import MailCookie from './components/MailCookie.vue'
 
 import EndScreen from './components/EndScreen.vue'
 
@@ -34,11 +36,13 @@ export default {
   components: {
     SwitcherCookie,
     JumperCookie,
+    MailCookie,
     EndScreen,
   },
   data() {
     return {
       screen: 1,
+      previousScreen: 1,
       myStyle:{
         backgroundColor: '#ffffff'
       }
@@ -46,9 +50,13 @@ export default {
   },
   methods: {
     changeScreen({ res, color }) {
-      console.log(color)
+      this.previousScreen = this.screen;
       this.screen = res;
       this.myStyle = { backgroundColor: color }
+    },
+    playAgain() {
+      this.screen = this.previousScreen;
+      this.myStyle = { backgroundColor: 'white'}
     }
   },
 }
