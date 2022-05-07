@@ -1,16 +1,18 @@
 <template>
-
-  <div class="popup">
-    <div class="popup-text">
-      Please manage the use of cookies below
-    </div>
-    <div class="b-btn-group my-4" role="group">
-      <button class="btn btn-success" :class="acceptClass" @click="changeLose()">
-        Accept
-      </button>
-      <button class="btn btn-danger" :class="rejectClass" @mouseover="toggleSides()" @click="changeWin()">
-        Reject
-      </button>
+  <div>
+    <div class="popup">
+      <div class="popup-text">
+        Please manage the use of cookies below
+      </div>
+      <div class="b-btn-group my-4" role="group">
+        <button class="btn btn-success" :class="acceptClass" @click="changeLose()">
+          Accept
+        </button>
+        <button class="btn btn-danger" :class="rejectClass" @click="changeWin()" @mouseover="randomJump()" 
+        :style="{ 'position': pos, 'left':posX, 'top':posY }">
+          Reject
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -55,23 +57,22 @@
 
 <script>
 export default {
-  name: 'SwitcherCookie',
+  name: 'JumperCookie',
   data() {
     return {
       acceptClass: 'left-btn',
       rejectClass: 'right-btn',
+      pos: '',
+      posX: '',
+      posY: '',
     }
   },
   methods: {
-    toggleSides() {
-      if (this.acceptClass === 'left-btn'){
-        this.acceptClass = 'right-btn';
-        this.rejectClass = 'left-btn';
-      }
-      else {
-        this.acceptClass = 'left-btn';
-        this.rejectClass = 'right-btn';
-      }
+    randomJump() {
+      this.rejectClass = '';
+      this.pos =  'absolute';
+      this.posX = `${String(Math.floor(Math.random() * (window.innerWidth-100)))}px`;
+      this.posY = `${String(Math.floor(Math.random() * (window.innerHeight-100)))}px`;
     },
     changeWin() {
       this.$emit("changeScreen", { res: "win", color: "#0aa51c" });
@@ -80,5 +81,6 @@ export default {
       this.$emit("changeScreen", { res: "lose", color: "#f02017" });
     }
   }
+
 }
 </script>
