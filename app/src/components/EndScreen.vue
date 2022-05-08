@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1> {{ message }} </h1>
-        <button> Play Again </button>
+        <button @click="playAgain()"> Play Again </button>
     </div>
 </template>
 
@@ -33,6 +33,11 @@ export default {
   props: ['message'],
   data(){
     return {
+    }
+  },
+  methods: {
+    playAgain() {
+      this.$emit("playAgain");
     }
   }
 }

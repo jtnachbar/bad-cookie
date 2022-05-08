@@ -18,6 +18,7 @@
 <style scoped>
   @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css");
   .popup {
+    position: relative;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 25px;
     width: 40vw;
@@ -43,13 +44,15 @@
   }
 
   .right-btn {
-    float: right;
-    margin-right: 5vw;
+    position: absolute;
+    right: 3vw;
+    bottom: 1vh;
   }
 
   .left-btn {
-    float: left;
-    margin-left: 5vw;
+    position: absolute;
+    left: 3vw;
+    bottom: 1vh;
   }
 </style>
 

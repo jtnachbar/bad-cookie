@@ -1,9 +1,9 @@
 <template>
   <div id='app' :style="myStyle">
-    <button v-if="screen != 3 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next" @click="screen += 1">
+    <button v-if="screen != 4 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next btn-nav" @click="screen += 1">
         Next
     </button>
-    <button v-if="screen != 1 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-prev" @click="screen -= 1">
+    <button v-if="screen != 1 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-prev btn-nav" @click="screen -= 1">
         Prev
     </button>
     <div v-if="screen==='lose'">
@@ -21,6 +21,9 @@
     <div v-if="screen===3">
       <MailCookie @changeScreen="changeScreen"/>
     </div>
+    <div v-if="screen===4">
+      <ListCookie @changeScreen="changeScreen"/>
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,7 @@
 import SwitcherCookie from './components/SwitcherCookie.vue'
 import JumperCookie from './components/JumperCookie.vue'
 import MailCookie from './components/MailCookie.vue'
+import ListCookie from './components/ListCookie.vue'
 
 import EndScreen from './components/EndScreen.vue'
 
@@ -38,6 +42,7 @@ export default {
     JumperCookie,
     MailCookie,
     EndScreen,
+    ListCookie,
   },
   data() {
     return {
@@ -89,5 +94,11 @@ html, body {
   left: 2vw;
   top: 3vh;
   position: absolute;
+}
+
+.btn-nav {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
 }
 </style>

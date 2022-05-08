@@ -20,6 +20,7 @@
 <style scoped>
   @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css");
   .popup {
+    position: relative;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 25px;
     width: 40vw;
@@ -45,13 +46,15 @@
   }
 
   .right-btn {
-    float: right;
-    margin-right: 5vw;
+    position: absolute;
+    right: 3vw;
+    bottom: 1vh;
   }
 
   .left-btn {
-    float: left;
-    margin-left: 5vw;
+    position: absolute;
+    left: 3vw;
+    bottom: 1vh;
   }
 </style>
 
@@ -71,8 +74,8 @@ export default {
     randomJump() {
       this.rejectClass = '';
       this.pos =  'absolute';
-      this.posX = `${String(Math.floor(Math.random() * (window.innerWidth-100)))}px`;
-      this.posY = `${String(Math.floor(Math.random() * (window.innerHeight-100)))}px`;
+      this.posX = `${String(Math.floor(Math.random() * (window.innerWidth)) - 0.3 * (window.innerWidth))}px`;
+      this.posY = `${String(Math.floor(Math.random() * (window.innerHeight)) - 0.3 * (window.innerHeight) )}px`;
     },
     changeWin() {
       this.$emit("changeScreen", { res: "win", color: "#0aa51c" });
