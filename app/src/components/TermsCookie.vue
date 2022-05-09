@@ -1,31 +1,22 @@
 <template>
   <div>
-    <div v-if="showMenu == false" class="popup">
+    <div class="popup">
         <div class="popup-text">
-          Please manage the use of cookies below
+          Read the terms & conditions to reject
         </div>
         <div class="b-btn-group my-4" role="group">
-        <button class="btn btn-success left-btn" @click="checkScreen()">
-          Accept
-        </button>
-        <button class="btn btn-secondary right-btn" @click="this.showMenu = true">
-          Manage
-        </button>
+          <button class="btn btn-success left-btn" @click="changeLose()">
+            Accept
+          </button>
+          <button class="btn btn-danger right-btn" v-if="showReject" @click="changeWin()">
+            Reject
+          </button>
         </div>
-    </div>
-    <div v-else class="popup">
-      <div class="checks">
-        <div v-for="val in 185" :key="val" class="form-check list-check"
-        style="{ position:absolute; left:2vw; top:1vh; }">
-          <input v-model="checkList[val-1]" class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Bad Cookie Number {{ val }}
-          </label>
+        <div class="terms" @scroll="onScroll($event);">
+          <div class="term-text">
+            {{ fileText }}
+          </div>
         </div>
-      </div>
-       <button class="btn btn-secondary left-btn" @click="this.showMenu = false">
-          Back
-      </button>
     </div>
   </div>
 </template>
@@ -37,13 +28,14 @@
     position: relative;
     border-radius: 25px;
     width: 40vw;
-    height: 40vh;
+    height: 50vh;
     background-color:antiquewhite;
     outline: 2px dashed black;
+    overflow: hidden;
   }
 
   .popup-text {
-    font-size: 36px;
+    font-size: 2vw;
     color: black;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
@@ -56,6 +48,10 @@
     border-radius: 10px;
     margin-bottom: 3vh;
     outline: 2px solid black;
+  }
+  
+  .terms::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
   }
 
   .right-btn {
@@ -70,52 +66,53 @@
     bottom: 1vh;
   }
 
-  .checks {
+  .terms {
     position: absolute;
     background-color: white;
     border-radius: 10px;
     left: 3vw;
-    top: 2vh;
+    top: 12vh;
     outline-style: solid;
     outline-width: 2px;
     outline-color: black;
     height: 22vh;
     width: 34vw;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
-  .list-check {
-    width: 30vw;
+  .term-text {
+    position:absolute; 
+    left:2vw; 
+    top:1vh;
   }
 
 </style>
 
 <script>
+import file from '@/files/file.txt'
 export default {
-  name: 'SwitcherCookie',
+  name: 'TermsCookie',
   data() {
     return {
-      showMenu: false,
-      checkList: Array(185).fill(true),
+      showReject: false,
     }
   },
   methods: {
-    checkScreen() {
-      console.log(this.checkList[0]);
-      for(let i = 0; i < 185; i++) {
-        if(this.checkList[i]) {
-          this.changeLose();
-          return;
-        }
-      }
-      this.changeWin();
-    },
     changeWin() {
       this.$emit("changeScreen", { res: "win", color: "#0aa51c" });
     },
     changeLose() {
       this.$emit("changeScreen", { res: "lose", color: "#f02017" });
     },
+    onScroll (event) {
+      if (event.target.clientHeight + event.target.scrollTop >= event.target.scrollHeight){
+        this.showReject = true;
+      }
+    },
+  },
+  created() {
+    this.fileText = file;
   }
 }
 </script>

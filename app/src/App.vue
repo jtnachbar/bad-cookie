@@ -1,6 +1,6 @@
 <template>
   <div id='app' :style="myStyle">
-    <button v-if="screen != 4 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next btn-nav" @click="screen += 1">
+    <button v-if="screen != 5 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next btn-nav" @click="screen += 1">
         Next
     </button>
     <button v-if="screen != 1 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-prev btn-nav" @click="screen -= 1">
@@ -24,6 +24,9 @@
     <div v-if="screen===4">
       <ListCookie @changeScreen="changeScreen"/>
     </div>
+    <div v-if="screen===5">
+      <TermsCookie @changeScreen="changeScreen"/>
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,7 @@ import SwitcherCookie from './components/SwitcherCookie.vue'
 import JumperCookie from './components/JumperCookie.vue'
 import MailCookie from './components/MailCookie.vue'
 import ListCookie from './components/ListCookie.vue'
+import TermsCookie from './components/TermsCookie.vue'
 
 import EndScreen from './components/EndScreen.vue'
 
@@ -43,6 +47,7 @@ export default {
     MailCookie,
     EndScreen,
     ListCookie,
+    TermsCookie,
   },
   data() {
     return {

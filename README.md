@@ -5,6 +5,6 @@ Unfortunately, it has become harder and harder to collect user data, with many u
 ## Todo:
 * Add slight delay to Switcher?
 * Adjust the dimensions for Mail
-* Add button that moves and goes faster the closer your move your mouse
-* Ask users to read terms and conditions that just scroll for forever
+* Add button that "runs away" from your mouse
+* Ask users to read terms and conditions that just scroll for forever (use overflow: hidden)
 * Endless managing menus
