@@ -90,7 +90,7 @@
 </style>
 
 <script>
-import file from '@/files/file.txt'
+import file from '@/files/terms.txt'
 export default {
   name: 'TermsCookie',
   data() {

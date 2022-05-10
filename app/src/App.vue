@@ -1,6 +1,6 @@
 <template>
   <div id='app' :style="myStyle">
-    <button v-if="screen != 5 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next btn-nav" @click="screen += 1">
+    <button v-if="screen != 6 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-next btn-nav" @click="screen += 1">
         Next
     </button>
     <button v-if="screen != 1 && screen != 'lose' && screen != 'win'" class="btn btn-secondary btn-prev btn-nav" @click="screen -= 1">
@@ -13,10 +13,10 @@
       <EndScreen message="Winner" @playAgain="playAgain"/>
     </div>
     <div v-if="screen===1">
-      <JumperCookie @changeScreen="changeScreen"/>
+      <SwitcherCookie @changeScreen="changeScreen"/>
     </div>
     <div v-if="screen===2">
-      <SwitcherCookie @changeScreen="changeScreen"/>
+      <TermsCookie @changeScreen="changeScreen"/>
     </div>
     <div v-if="screen===3">
       <MailCookie @changeScreen="changeScreen"/>
@@ -25,7 +25,10 @@
       <ListCookie @changeScreen="changeScreen"/>
     </div>
     <div v-if="screen===5">
-      <TermsCookie @changeScreen="changeScreen"/>
+      <JumperCookie @changeScreen="changeScreen"/>
+    </div>
+    <div v-if="screen===6">
+      <MenuCookie @changeScreen="changeScreen"/>
     </div>
   </div>
 </template>
@@ -36,6 +39,7 @@ import JumperCookie from './components/JumperCookie.vue'
 import MailCookie from './components/MailCookie.vue'
 import ListCookie from './components/ListCookie.vue'
 import TermsCookie from './components/TermsCookie.vue'
+import MenuCookie from './components/MenuCookie.vue'
 
 import EndScreen from './components/EndScreen.vue'
 
@@ -48,6 +52,7 @@ export default {
     EndScreen,
     ListCookie,
     TermsCookie,
+    MenuCookie,
   },
   data() {
     return {
